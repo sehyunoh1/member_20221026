@@ -32,4 +32,13 @@ public class MemberService {
     public List<MemberDTO> findAll(){ return memberRepository.findAll();}
 
     public MemberDTO findById(Long memberId){ return memberRepository.findById(memberId);}
+
+    public boolean delete(Long memberId) {
+        int deleteResult = memberRepository.delete(memberId);
+        if (deleteResult>0){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

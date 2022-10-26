@@ -17,6 +17,9 @@
     <select id="findById" parameterType="member" resultType="member">
     select * from member_table where memberId=#{memberId};
     </select>
+    <delete id="delete" parameterType="member" >
+        delete * from member_table where id=#{memberId}
+    </delete>
 </mapper>
 
 

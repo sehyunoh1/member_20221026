@@ -26,7 +26,6 @@
     <a href="/save">신규 회원 등록</a><br>
     <a href="/login"  >로그인</a><br>
     <a href="/members" >회원 목록</a><br>
-    <a href="/members" >회원 목록</a><br>
 </div>
 </body>
 </html>

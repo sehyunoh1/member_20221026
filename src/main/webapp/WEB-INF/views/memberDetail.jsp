@@ -25,6 +25,10 @@
             <h5> 비밀번호 : ${member.memberPassword}</h5>
             <h5> 나이 : ${member.memberAge}</h5>
             <h5> 전화번호 : ${member.memberMobile}</h5>
+            <form action="/delete?memberId=${member.memberId}">
+                <input type="submit" value="회원 탈퇴" class="btn btn-primary">
+
+            </form>
         </div>
 </body>
 </html>

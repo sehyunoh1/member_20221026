@@ -60,4 +60,13 @@ public class MemberContoller {
         model.addAttribute("member" ,findResult);
         return "memberDetail";
     }
+    @GetMapping("/delete") // 회원 탈퇴
+    public String delete(@RequestParam("memberId") Long memberId) {
+        boolean delete = memberService.delete(memberId);
+        if(delete){
+            return "memberDelete";
+        }else {
+            return "memberList";
+        }
+    }
 }
