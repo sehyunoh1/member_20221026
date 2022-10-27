@@ -18,15 +18,16 @@
 </head>
 <body>
     <div class="container" id="main">
-        <form action="/save" method="post">
+        <form action="/save" method="post" name="saveForm">
             <input type="text" name="memberEmail" placeholder="이메일" id="Email" class="form-control" onblur="EmailCk()"><br>
-            <h5 id="emailCk"></h5>
+            <span id="emailCk"></span>
             <input type="text" name="memberPassword" placeholder="비밀번호" id="Pass" class="form-control" onblur="PasswordCK()"><br>
-            <h5 id="passwordCk"></h5>
+            <span id="passwordCk"></span>
             <input type="text" name="memberName" placeholder="이름" class="form-control"><br>
             <input type="text" name="memberAge" placeholder="나이" class="form-control"><br>
             <input type="text" name="memberMobile" placeholder="전화번호" class="form-control"><br>
-            <input type="submit" class="btn btn-primary" value="회원 가입">
+<%--            <input type="submit" class="btn btn-primary" value="회원 가입">--%>
+            <input type="button" value="회원가입" onclick="save()" class="btn btn-primary">
     </div>
     </form>
 </body>
@@ -54,6 +55,21 @@
             emailCk.innerHTML="필수 입력 항목입니다."
             emailCk.style.color="red"
         }
+    }
+    const save = () => {
+      if(document.saveForm.memberEmail.value == ""){
+          // alert("이메일을 입력해 주세요")
+          emailCk.innerHTML="이메일을 입력해주세요."
+          emailCk.style.color = "red"
+          return false;
+      }else if(document.saveForm.memberPassword.value == "") {
+          alert("비밀번호를 입력해주세요")
+          return false;
+      }else if (document.saveForm.memberName.value == ""){
+          return false;
+      }
+      alert("회원가입이 완료되었습니다.")
+      document.saveForm.submit();
     }
 </script>
 </html>

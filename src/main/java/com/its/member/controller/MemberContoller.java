@@ -10,6 +10,7 @@ import com.its.member.dto.MemberDTO;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
 import java.lang.reflect.Member;
 import java.util.List;
 
@@ -34,18 +35,31 @@ public class MemberContoller {
     @GetMapping("/login") // 로그인
     public String loginform(){return "memberLogin";}
 
-    @PostMapping("/login")
-    public String login(@RequestParam("memberEmail") String memberEmail,
-                        @RequestParam("memberPassword") String memberPassword, Model model){
+//    @PostMapping("/login")
+//    public String login(@RequestParam("memberEmail") String memberEmail,
+//                        @RequestParam("memberPassword") String memberPassword, Model model){
+//
+//        boolean loginResult = memberService.login(memberEmail,memberPassword);
+//        model.addAttribute("member",loginResult);
+//        if(loginResult){
+//            return "memberMain";
+//
+//        }else{
+//            return "index";
+//        }
+//    }
+    @PostMapping("login")
+    public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session, Model model){
+        boolean loginResult = memberService.login(memberDTO);
+      if(loginResult){
+           // 세션에 로그인한 사용자의 이메일을 저장
+          session.setAttribute("loginEmail", memberDTO.getMemberEmail());
+          model.addAttribute("modelEmail", memberDTO.getMemberEmail());
+          return "memberMain";
 
-        boolean loginResult = memberService.login(memberEmail,memberPassword);
-        model.addAttribute("member",loginResult);
-        if(loginResult){
-            return "memberMain";
-
-        }else{
-            return "index";
-        }
+       }else{
+           return "memberLogin";
+       }
     }
 
     @GetMapping("/members") // 회원 목록

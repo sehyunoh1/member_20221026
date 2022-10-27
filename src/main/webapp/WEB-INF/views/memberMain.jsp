@@ -17,8 +17,13 @@
     </style>
 </head>
 <body>
-    <h2>로그인 성공!</h2><br>
-    <a href="/">로그아웃</a>
+    <div class="container">
+        <h2>${sessionScope.loginEmail}님 환영합니다.</h2>
+        <h2>model 값 : ${modelEmail}</h2>
+
+        <a href="/">index.jsp</a>
+    </div>
+
 
 
 </body>

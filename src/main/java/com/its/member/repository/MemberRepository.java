@@ -25,6 +25,9 @@ public class MemberRepository {
             return false;
         }
     }
+    public MemberDTO login(MemberDTO memberDTO) {
+        return sql.selectOne("Member.login", memberDTO);
+    }
     public List<MemberDTO> findAll(){ return sql.selectList("Member.findAll");}
 
     public MemberDTO findById(Long memberId){ return sql.selectOne("Member.findById", memberId);}

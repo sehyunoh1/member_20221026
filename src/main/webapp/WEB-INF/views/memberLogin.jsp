@@ -26,4 +26,9 @@
         </form>
     </div>
 </body>
+<script>
+    const loginForm = () => {
+
+    }
+</script>
 </html>
