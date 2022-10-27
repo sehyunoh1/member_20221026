@@ -26,6 +26,20 @@
     <a href="/save">신규 회원 등록</a><br>
     <a href="/login"  >로그인</a><br>
     <a href="/members" >회원 목록</a><br>
+    <button class="btn btn-primary" onclick="saveFn()">회원가입</button>
+    <button class="btn btn-danger" onclick="loginFn()">로그인</button>
+    <button class="btn btn-dark" onclick="listFn()">목록조회</button>
 </div>
 </body>
+<script>
+    const saveFn = () => {
+        location.href="/save";
+    }
+    const loginFn = () => {
+        location.href="/login";
+    }
+    const listFn = () => {
+        location.href="/members";
+    }
+</script>
 </html>
