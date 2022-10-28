@@ -26,9 +26,9 @@
         </form>
     </div>
 </body>
-<script>
-    const loginForm = () => {
+<%--<script>--%>
+<%--    const loginForm = () => {--%>
 
-    }
-</script>
+<%--    }--%>
+<%--</script>--%>
 </html>

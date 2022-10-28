@@ -32,6 +32,7 @@
             <tr>
                 <th>이름</th>
                 <th>이메일</th>
+                <th>삭제</th>
 
             </tr>
         <c:forEach items="${memberList}" var="member">
@@ -40,9 +41,21 @@
                     <a href="/member?memberId=${member.memberId}">${member.memberName}</a>
                 </td>
                 <td>${member.memberEmail}</td>
+                <td>
+                    <button class="btn btn-danger" onclick="deleteMember('${member.memberId}')">삭제</button>
+                </td>
             </tr>
         </c:forEach>
         </table>
       </div>
 </body>
+<script>
+    const deleteMember = (clickedId) => {
+
+      <%--  console.log('${memberList}');--%>
+        console.log("클릭한 id값:", clickedId);
+        location.href="/delete?memberId="+clickedId;
+
+    }
+</script>
 </html>

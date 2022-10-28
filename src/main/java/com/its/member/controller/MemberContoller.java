@@ -74,13 +74,40 @@ public class MemberContoller {
         model.addAttribute("member" ,findResult);
         return "memberDetail";
     }
-    @GetMapping("/delete") // 회원 탈퇴
-    public String delete(@RequestParam("memberId") Long memberId) {
-        boolean delete = memberService.delete(memberId);
-        if(delete){
-            return "memberDelete";
-        }else {
-            return "memberList";
-        }
+    @GetMapping ("/delete") // 회원 탈퇴
+    public String delete(@RequestParam("memberId") Long memberId, Model model) {
+       memberService.delete(memberId);
+       // 1. 삭제후 목록을 DB에서 가져오고 memberList.jsp로 출력
+//        List<MemberDTO> memberDTOList = memberService.findAll();
+//        model.addAttribute("memberList",memberDTOList);
+//        return "memberList";
+
+        // 2. redirect 방식을 이용하여 /members 주소 요청
+        return "redirect:/members";
     }
+
+    @GetMapping("/update")
+    public String updateform(HttpSession session, Model model){
+        // session 값을 가져오기
+        // session.getAttribute의 리턴타입이 object이기 때문에 강제형변환
+       String memberEmail= (String) session.getAttribute("loginEmail");
+       MemberDTO updateDTO= memberService.findbyEmail(memberEmail);
+       model.addAttribute("member",updateDTO);
+        return "memberUpdate";
+    }
+    @PostMapping("/update")
+    public String update(@ModelAttribute MemberDTO memberDTO ){
+       boolean result =  memberService.update(memberDTO);
+      if(result){
+          //로그인 회원의 memberDetail.jsp
+          return "redirect:/member?memberId="+memberDTO.getMemberId();
+      }else {
+          return "index";
+      }
+    }
+    @GetMapping("logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "index";
+        }
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.its.member.dto.MemberDTO;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 
@@ -29,7 +30,7 @@ public class MemberService {
         return false;
     }
     }
-    public boolean login(MemberDTO memberDTO) {
+    public boolean login(MemberDTO memberDTO) { // 메소드 오버로딩: 매개변수가 다름.
         MemberDTO member = memberRepository.login(memberDTO);
         if (member != null) {
             return true;
@@ -41,12 +42,18 @@ public class MemberService {
 
     public MemberDTO findById(Long memberId){ return memberRepository.findById(memberId);}
 
-    public boolean delete(Long memberId) {
-        int deleteResult = memberRepository.delete(memberId);
-        if (deleteResult>0){
+    public void delete(Long memberId) {memberRepository.delete(memberId);
+
+    }
+    public MemberDTO findbyEmail(String memberEmail){ return memberRepository.findbyEmail(memberEmail);}
+
+    public boolean update(MemberDTO memberDTO){
+        int result = memberRepository.update(memberDTO);
+        if(result >0) {
             return true;
-        } else {
+        }else {
             return false;
         }
     }
+
 }

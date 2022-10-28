@@ -14,12 +14,18 @@
     <select id="findAll" resultType="member">
         select * from member_table
     </select>
-    <select id="findById" parameterType="member" resultType="member">
+    <select id="findById" parameterType="Long" resultType="member">
     select * from member_table where memberId=#{memberId};
     </select>
-    <delete id="delete" parameterType="member" >
-        delete * from member_table where id=#{memberId}
+    <delete id="delete" parameterType="Long" >
+        delete  from member_table where memberId=#{memberId};
     </delete>
+    <select id="findbyEmail" parameterType="String" resultType="member">
+        select * from member_table where memberEmail=#{memberEmail};
+    </select>
+    <update id="update" parameterType="member">
+    update member_table set memberName=#{memberName} , memberAge=#{memberAge} where memberId=#{memberId};
+    </update>
 </mapper>
 
 
