@@ -55,5 +55,13 @@ public class MemberService {
             return false;
         }
     }
-
+    public  String EmailCk(String Email) {
+        String EmailCk = memberRepository.EmailCk(Email);
+        System.out.println("EmailCk = " + EmailCk);
+        if(EmailCk == null){
+            return "ok";
+        }else {
+            return "no";
+        }
+    }
 }

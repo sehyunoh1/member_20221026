@@ -37,4 +37,8 @@ public class MemberRepository {
     public MemberDTO findbyEmail(String memberEmail){return sql.selectOne("Member.findbyEmail",memberEmail);}
 
     public int update(MemberDTO memberDTO){return sql.update("Member.update",memberDTO);}
+
+    public String EmailCk (String Email) {
+
+        return sql.selectOne("Member.EmailCk", Email); }
 }
