@@ -26,7 +26,7 @@
             padding: 5px;
         }
         #findmember {
-            margin-top: 10px;
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -56,16 +56,18 @@
         </c:forEach>
         </table>
 
-          <table id="findmember">
-              <tr>
-                  <td id="findName">이름 </td>
-                  <td id="findEmail">이메일 </td>
-                  <td id="findPassword">비밀번호 </td>
-                  <td id="findAge">나이 </td>
-              </tr>
-          </table>
+<%--          <table id="findmember">--%>
+<%--              <tr>--%>
+<%--                  <td id="findName">이름 </td>--%>
+<%--                  <td id="findEmail">이메일 </td>--%>
+<%--                  <td id="findPassword">비밀번호 </td>--%>
+<%--                  <td id="findAge">나이 </td>--%>
+<%--              </tr>--%>
+<%--          </table>--%>
       </div>
+    <div id="detail-area">
 
+    </div>
 </body>
 <script>
     const deleteMember = (clickedId) => {
@@ -75,18 +77,42 @@
     }
     const findMember = (findId) => {
         console.log("findId:", findId)
+        const detailArea = document.getElementById("detail-area");
         $.ajax({
            type: "post",
            url:"/detail-ajax",
            data:{findId,findId},
            dataType: "json",
-           success: function (result){
-               console.log(result);
-               document.getElementById("findName").innerHTML =result.MemberId;
-               document.getElementById("findEmail").innerHTML=result.MemberEmail;
-               document.getElementById("findPassword").innerHTML=result.MemberPassword;
-               document.getElementById("findAge").innerHTML=result.MemberAge;
-
+           success: function (member){
+               // console.log(result);
+            // document.getElementById("findName").innerHTML =result.MemberName;
+            // document.getElementById("findEmail").innerHTML=result.MemberEmail;
+            // document.getElementById("findPassword").innerHTML=result.MemberPassword;
+            // document.getElementById("findAge").innerHTML=result.MemberAge;
+               let result =
+                   "        <table class=\"table table-striped\">\n" +
+                   "            <tr>\n" +
+                   "                <th>id</th>\n" +
+                   "                <td>"+ member.MemberId+"</td>\n" +
+                   "            </tr>\n" +
+                   "            <tr>\n" +
+                   "                <th>email</th>\n" +
+                   "                <td>" + member.MemberEmail + "</td>\n" +
+                   "            </tr>\n" +
+                   "            <tr>\n" +
+                   "                <th>password</th>\n" +
+                   "                <td>" + member.MemberPassword + "</td>\n" +
+                   "            </tr>\n" +
+                   "            <tr>\n" +
+                   "                <th>name</th>\n" +
+                   "                <td> " + member.MemberName + "</td>\n" +
+                   "            </tr>\n" +
+                   "            <tr>\n" +
+                   "                <th>age</th>\n" +
+                   "                <td>" + member.MemberAge + "</td>\n" +
+                   "            </tr>\n" +
+                   "        </table> "  ;
+               detailArea.innerHTML = result;
            }
         });
 
