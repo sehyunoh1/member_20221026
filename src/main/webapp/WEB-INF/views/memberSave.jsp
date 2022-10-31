@@ -88,7 +88,7 @@
                   EmailCK1.style.color="green";
               }else if(result == "no") {
                   EmailCK1.innerHTML = "이미 사용중인 이메일입니다."
-                  EmailCK1.style.color S= "red";
+                  EmailCK1.style.color = "red";
               }
           },
           error: function () {

@@ -161,4 +161,9 @@ public class MemberContoller {
         System.out.println("Email = " + Email);
         return memberService.EmailCk(Email);
     }
+    @PostMapping("/detail-ajax")
+    public @ResponseBody MemberDTO findById (@RequestParam("findId") Long findId){
+        MemberDTO findmemberDTO = memberService.findByMember(findId);
+        return findmemberDTO;
+    }
 }

@@ -64,4 +64,8 @@ public class MemberService {
             return "no";
         }
     }
+
+    public MemberDTO findByMember (Long findId){
+        return memberRepository.findByMember(findId);
+    };
 }

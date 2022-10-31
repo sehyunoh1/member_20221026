@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="/resources/js/jquery.js"></script>
     <style>
         *{font-family:'Jua', sans-serif;  }
         #main{
@@ -24,6 +25,9 @@
             margin : auto;
             padding: 5px;
         }
+        #findmember {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -33,7 +37,7 @@
                 <th>이름</th>
                 <th>이메일</th>
                 <th>삭제</th>
-
+                <th>조회(ajax)</th>
             </tr>
         <c:forEach items="${memberList}" var="member">
             <tr>
@@ -44,17 +48,47 @@
                 <td>
                     <button class="btn btn-danger" onclick="deleteMember('${member.memberId}')">삭제</button>
                 </td>
+                <td>
+                    <button class="btn btn-primary" onclick="findMember('${member.memberId}')">조회</button>
+                </td>
+
             </tr>
         </c:forEach>
         </table>
+
+          <table id="findmember">
+              <tr>
+                  <td id="findName">이름 </td>
+                  <td id="findEmail">이메일 </td>
+                  <td id="findPassword">비밀번호 </td>
+                  <td id="findAge">나이 </td>
+              </tr>
+          </table>
       </div>
+
 </body>
 <script>
     const deleteMember = (clickedId) => {
-
       <%--  console.log('${memberList}');--%>
-        console.log("클릭한 id값:", clickedId);
+      //   console.log("클릭한 id값:", clickedId);
         location.href="/delete?memberId="+clickedId;
+    }
+    const findMember = (findId) => {
+        console.log("findId:", findId)
+        $.ajax({
+           type: "post",
+           url:"/detail-ajax",
+           data:{findId,findId},
+           dataType: "json",
+           success: function (result){
+               console.log(result);
+               document.getElementById("findName").innerHTML =result.MemberId;
+               document.getElementById("findEmail").innerHTML=result.MemberEmail;
+               document.getElementById("findPassword").innerHTML=result.MemberPassword;
+               document.getElementById("findAge").innerHTML=result.MemberAge;
+
+           }
+        });
 
     }
 </script>

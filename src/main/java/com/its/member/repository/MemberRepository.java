@@ -41,4 +41,6 @@ public class MemberRepository {
     public String EmailCk (String Email) {
 
         return sql.selectOne("Member.EmailCk", Email); }
+
+    public MemberDTO findByMember(Long findId){ return sql.selectOne("Member.findById",findId);}
 }
